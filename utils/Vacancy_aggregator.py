@@ -19,11 +19,11 @@ class AbstractJobStorage(ABC):
 
 class JSONJobStorage(AbstractJobStorage):
 
-    def __init__(self, file_path="vacancies.json"):
+    def __init__(self, file_path="=../data/vacancies.json"):
         self.file_path = file_path
 
     def add_vacancy(self, vacancy_info):
-        with open(self.file_path, 'a') as file:
+        with open(self.file_path, 'w', encoding="utf8") as file:
             json.dump(vacancy_info, file)
             file.write('\n')
 

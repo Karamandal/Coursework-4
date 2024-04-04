@@ -15,8 +15,11 @@ class Vacancies:
         return self.min_salary < other.max_salary
 
     def __repr__(self):
-        return (f"""Название вакансии: {self.name}\n
-        Заработная плата: {self.max_salary} - {self.min_salary} {self.currency}\nТребования: {self.requirements}
-        Ссылка на вакансию: {self.link}""")
+        """
+        Выводит данные
+        """
+        return (f"\nНазвание вакансии: {self.name}\n"
+                f"Заработная плата: {self.max_salary} - {self.min_salary} {self.currency}\n"
+                f"Требования: {self.requirements}\nСсылка на вакансию: {self.link}\n")
 
 
