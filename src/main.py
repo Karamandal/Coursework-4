@@ -4,6 +4,9 @@ from utils.Vacancy_aggregator import JSONJobStorage
 
 
 def get_value(dictionary, *keys):
+    """
+    Возвращает значение словаря по ключу
+    """
     for key in keys:
         if dictionary is None:
             return None
@@ -12,13 +15,19 @@ def get_value(dictionary, *keys):
 
 
 def user_interaction():
+    """
+    Взаимодействует с пользователем
+    """
     name_vacancy = input('Введите название вакансии: ')
     keyword_vacancy = input('Введите ключевые слова для фильтрации вакансий: ').split()
     top_n = int(input('Введите количество вакансий для отображения по убыванию зарплаты: '))
 
     vacancy_hh = API_HH()
+    # Заходит на ресурс
     all_vacancy = vacancy_hh.getting_vacancies(name_vacancy)
+    # Получает результат по запросу
     all_vacancy = [vacancy for vacancy in all_vacancy.get('items')]
+    # Делает перебор по полученному результату
     if len(all_vacancy) == 0:
         print("По вашему запросу вакансий не найдено")
     else:
@@ -28,6 +37,7 @@ def user_interaction():
         vacancies = []
 
         for vacancy in all_vacancy:
+            # Получает данные по ключу
             name = get_value(vacancy, 'name')
             min_salary = get_value(vacancy, 'salary', 'from')
             max_salary = get_value(vacancy, 'salary', 'to')
@@ -44,13 +54,13 @@ def user_interaction():
             result = Vacancies.__repr__(v)
             print(result)
 
-            # Создаем экземпляр класса JSONFileWriter
+            # Создает экземпляр класса JSONJobStorage
             file_writer = JSONJobStorage('../data/vacancies.json')
 
-            # Подготавливаем данные для записи в файл
+            # Подготавливает данные для записи в файл
             data_to_write = [vars(vacancy) for vacancy in top_vacancies]
 
-            # Записываем данные в файл
+            # Записывает данные в файл
             file_writer.add_vacancy(data_to_write)
 
 

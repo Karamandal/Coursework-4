@@ -9,6 +9,9 @@ class AbstractAPI(ABC):
 
 
 class API_HH(AbstractAPI):
+    """
+    Получает данные
+    """
     def getting_vacancies(self, keyword):
         url = 'https://api.hh.ru/vacancies'
         params = {'text': keyword}

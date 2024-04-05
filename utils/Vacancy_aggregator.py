@@ -3,7 +3,9 @@ import json
 
 
 class AbstractJobStorage(ABC):
-
+    """
+    Абстрактный класс для работы с данными
+    """
     @abstractmethod
     def add_vacancy(self, vacancy_info):
         pass
@@ -18,7 +20,9 @@ class AbstractJobStorage(ABC):
 
 
 class JSONJobStorage(AbstractJobStorage):
-
+    """
+    Класс для работы с данными
+    """
     def __init__(self, file_path="=../data/vacancies.json"):
         self.file_path = file_path
 
